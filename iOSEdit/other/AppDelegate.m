@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  iOSEdit
 //
-//  Created by AnX on 2021/2/20.
+//  Created by Stan on 2021/2/20.
 //
 
 #import "AppDelegate.h"

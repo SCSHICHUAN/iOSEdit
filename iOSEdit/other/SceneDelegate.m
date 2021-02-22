@@ -2,7 +2,7 @@
 //  SceneDelegate.m
 //  iOSEdit
 //
-//  Created by AnX on 2021/2/20.
+//  Created by Stan on 2021/2/20.
 //
 
 #import "SceneDelegate.h"

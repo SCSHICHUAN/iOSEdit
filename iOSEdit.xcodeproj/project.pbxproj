@@ -14,6 +14,11 @@
 		82C065F925E1176700648650 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82C065F825E1176700648650 /* Assets.xcassets */; };
 		82C065FC25E1176700648650 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82C065FA25E1176700648650 /* LaunchScreen.storyboard */; };
 		82C065FF25E1176700648650 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C065FE25E1176700648650 /* main.m */; };
+		82C0660F25E11B7C00648650 /* WebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C0660E25E11B7C00648650 /* WebController.m */; };
+		82C0661525E3487B00648650 /* SCEdit.html in Resources */ = {isa = PBXBuildFile; fileRef = 82C0661425E3487B00648650 /* SCEdit.html */; };
+		82C0661825E348F000648650 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 82C0661725E348F000648650 /* style.css */; };
+		82C0661B25E3491A00648650 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = 82C0661A25E3491A00648650 /* script.js */; };
+		82C0662425E34B7000648650 /* ScriptDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C0662325E34B7000648650 /* ScriptDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +34,13 @@
 		82C065FB25E1176700648650 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82C065FD25E1176700648650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82C065FE25E1176700648650 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		82C0660D25E11B7C00648650 /* WebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebController.h; sourceTree = "<group>"; };
+		82C0660E25E11B7C00648650 /* WebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebController.m; sourceTree = "<group>"; };
+		82C0661425E3487B00648650 /* SCEdit.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = SCEdit.html; sourceTree = "<group>"; };
+		82C0661725E348F000648650 /* style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		82C0661A25E3491A00648650 /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
+		82C0662225E34B7000648650 /* ScriptDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScriptDelegate.h; sourceTree = "<group>"; };
+		82C0662325E34B7000648650 /* ScriptDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScriptDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +98,7 @@
 		82C0660925E119D300648650 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				82C0661325E3484F00648650 /* H5 */,
 				82C0660C25E11A0600648650 /* model */,
 				82C0660B25E119FE00648650 /* view */,
 				82C0660A25E119E200648650 /* controller */,
@@ -98,6 +111,10 @@
 			children = (
 				82C065F225E1176600648650 /* ViewController.h */,
 				82C065F325E1176600648650 /* ViewController.m */,
+				82C0660D25E11B7C00648650 /* WebController.h */,
+				82C0660E25E11B7C00648650 /* WebController.m */,
+				82C0662225E34B7000648650 /* ScriptDelegate.h */,
+				82C0662325E34B7000648650 /* ScriptDelegate.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -114,6 +131,16 @@
 			children = (
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		82C0661325E3484F00648650 /* H5 */ = {
+			isa = PBXGroup;
+			children = (
+				82C0661425E3487B00648650 /* SCEdit.html */,
+				82C0661725E348F000648650 /* style.css */,
+				82C0661A25E3491A00648650 /* script.js */,
+			);
+			path = H5;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,8 +199,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82C0661825E348F000648650 /* style.css in Resources */,
+				82C0661B25E3491A00648650 /* script.js in Resources */,
 				82C065FC25E1176700648650 /* LaunchScreen.storyboard in Resources */,
 				82C065F925E1176700648650 /* Assets.xcassets in Resources */,
+				82C0661525E3487B00648650 /* SCEdit.html in Resources */,
 				82C065F725E1176600648650 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,7 +216,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				82C065F425E1176600648650 /* ViewController.m in Sources */,
+				82C0660F25E11B7C00648650 /* WebController.m in Sources */,
 				82C065EE25E1176600648650 /* AppDelegate.m in Sources */,
+				82C0662425E34B7000648650 /* ScriptDelegate.m in Sources */,
 				82C065FF25E1176700648650 /* main.m in Sources */,
 				82C065F125E1176600648650 /* SceneDelegate.m in Sources */,
 			);
