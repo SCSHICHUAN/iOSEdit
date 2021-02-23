@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WebController : UIViewController
-
+@property(nonatomic)UIView *bottomView;
 @end
 
 NS_ASSUME_NONNULL_END

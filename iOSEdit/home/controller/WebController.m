@@ -8,7 +8,17 @@
 #import "WebController.h"
 #import <WebKit/WebKit.h>
 #import "ScriptDelegate.h"
+#import <objc/runtime.h>
 
+#pragma mak-添加wktoolBar
+@interface _NoInputAccessoryView : NSObject
+@end
+@implementation _NoInputAccessoryView
+- (id)inputAccessoryView {
+    WebController *vc = [[WebController alloc] init];
+    return vc.bottomView;
+}
+@end
 
 
 @interface WebController ()
@@ -20,7 +30,6 @@ WKUIDelegate>
     UIButton *justifyCenterButton;
 }
 @property(nonatomic)WKWebView *wkWebView;
-@property(nonatomic)UIView *bottomView;
 @end
 
 @implementation WebController
@@ -106,6 +115,12 @@ WKUIDelegate>
         [insertImageButton addTarget:self action:@selector(insertImageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [_bottomView addSubview:insertImageButton];
         
+        UIButton *closeKeyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [closeKeyButton setImage:[UIImage imageNamed:@"jianpanshang"] forState:UIControlStateNormal];
+        closeKeyButton.frame = CGRectMake(44*6, 0, 44, 44);
+        [closeKeyButton addTarget:self action:@selector(closeKeyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView addSubview:closeKeyButton];
+        
         
     }
     return _bottomView;
@@ -117,12 +132,43 @@ WKUIDelegate>
     NSString *htmlString = [[NSString alloc]initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     [self.wkWebView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     [self.view addSubview:self.wkWebView];
-    [self.view addSubview:self.bottomView];
     
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [self removeInputAccessoryViewFromWKWebView:self.wkWebView];
     
+}
+
+- (void)removeInputAccessoryViewFromWKWebView:(WKWebView *)webView {
+    UIView *targetView;
+
+    for (UIView *view in webView.scrollView.subviews) {
+        if([[view.class description] hasPrefix:@"WKContent"]) {
+            targetView = view;
+        }
+    }
+    if (!targetView) {
+        return;
+    }
+    NSString *noInputAccessoryViewClassName = [NSString stringWithFormat:@"%@_NoInputAccessoryView", targetView.class.superclass];
+    Class newClass = NSClassFromString(noInputAccessoryViewClassName);
+
+    if(newClass == nil) {
+        newClass = objc_allocateClassPair(targetView.class, [noInputAccessoryViewClassName cStringUsingEncoding:NSASCIIStringEncoding], 0);
+        if(!newClass) {
+            return;
+        }
+        Method method = class_getInstanceMethod([_NoInputAccessoryView class], @selector(inputAccessoryView));
+        class_addMethod(newClass, @selector(inputAccessoryView), method_getImplementation(method), method_getTypeEncoding(method));
+
+        objc_registerClassPair(newClass);
+    }
+    object_setClass(targetView, newClass);
+}
+-(void)doneClicked
+{
+    NSLog(@"%s",__func__);
 }
 #pragma mark-WKScriptMessageHandler
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
@@ -133,34 +179,34 @@ WKUIDelegate>
 /**
  *   键盘弹出
  */
-- (void)keyboardWillShow:(NSNotification *)note
-{
-    
-    // 1.取出键盘的高度
-    CGRect temp  = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGFloat height = temp.size.height;
-    // 2.让工具条向上平移
-    // 2.1取出键盘弹出的动画时间
-    NSTimeInterval timte = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    [UIView animateWithDuration:timte delay:0 options:7 << 16 animations:^{
-        self.bottomView.transform = CGAffineTransformMakeTranslation(0, -height);
-    } completion:nil];
-    
-}
-/**
- *  键盘隐藏
- */
-- (void)keyboardWillHide:(NSNotification *)note
-{
-    // 2.1取出键盘弹出的动画时间
-    NSTimeInterval timte = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    // 清空transform
-    [UIView animateWithDuration:timte delay:0 options:7 << 16 animations:^{
-        self.bottomView.transform = CGAffineTransformIdentity;
-    } completion:nil];
-    
-}
+//- (void)keyboardWillShow:(NSNotification *)note
+//{
+//
+//    // 1.取出键盘的高度
+//    CGRect temp  = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//    CGFloat height = temp.size.height;
+//    // 2.让工具条向上平移
+//    // 2.1取出键盘弹出的动画时间
+//    NSTimeInterval timte = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+//    [UIView animateWithDuration:timte delay:0 options:7 << 16 animations:^{
+//        self.bottomView.transform = CGAffineTransformMakeTranslation(0, -height+44);
+//    } completion:nil];
+//}
+//
+///**
+// *  键盘隐藏
+// */
+//- (void)keyboardWillHide:(NSNotification *)note
+//{
+//    // 2.1取出键盘弹出的动画时间
+//    NSTimeInterval timte = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+//
+//    // 清空transform
+//    [UIView animateWithDuration:timte delay:0 options:7 << 16 animations:^{
+//        self.bottomView.transform = CGAffineTransformIdentity;
+//    } completion:nil];
+//
+//}
 
 -(void)boldButtonClick:(UIButton*)send
 {
@@ -211,6 +257,10 @@ WKUIDelegate>
     [self ocTojs:@"insertImage"];
 }
 
+-(void)closeKeyButtonClick:(UIButton*)send
+{
+    [self.wkWebView resignFirstResponder];
+}
 
 
 -(void)ocTojs:(NSString*)action
