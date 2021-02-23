@@ -259,7 +259,7 @@ WKUIDelegate>
 
 -(void)closeKeyButtonClick:(UIButton*)send
 {
-    [self.wkWebView resignFirstResponder];
+    [self ocTojs:@"unfocus"];    
 }
 
 

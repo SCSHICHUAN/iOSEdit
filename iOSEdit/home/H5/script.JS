@@ -11,7 +11,7 @@
 //var btnHtmlDoc = document.getElementById('html');
 
 //btnBoldDoc.onclick = function(){
-//    insertImage('https://stanserver.cn:444/scEdit.png','img');
+//    unfocus();
 //}
 
 
@@ -50,6 +50,10 @@ function ocTojsAction(parameter)
             insertImage('https://stanserver.cn:444/scEdit.png','img');
             break;
             
+        case 'unfocus':
+            unfocus();
+            break;
+            
         default:
             break;
     }
@@ -84,14 +88,39 @@ function justifyCenter(){
 }
 //插入图片
 function insertImage(url, alt) {
-    var html ="<br />" + '<img src="' + url + '" alt="' + alt + '" style="width:90%;"/>';
+    var html ='</br><img src="' + url + '" alt="' + alt + '" style="width:80%;"/>';
     insertHTML(html);
+    justifyCenter();
+    setTimeout(function() {
+    	insertHTML("</br>");
+    }, 100);
+   
+
+   setTimeout(function() {
+    	justifyLeft();
+    }, 200);
+   
 }
 
 //插入html
 function insertHTML(html) {
     document.execCommand('insertHTML', false, html);
 }
+//失去焦点
+function unfocus()
+{
+    document.activeElement.blur();
+}
+//键盘输入
+document.onkeydown=function(event)
+{
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    if(e && e.keyCode==13){ // enter 键
+//        insertHTML("<br/>");
+    }
+}
+
+
 
 ////红色
 //btnRedDoc.onclick = function(){
