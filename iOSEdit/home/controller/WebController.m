@@ -10,13 +10,14 @@
 #import "ScriptDelegate.h"
 #import <objc/runtime.h>
 
+WebController *publicWebController;
+
 #pragma mak-添加wktoolBar
 @interface _NoInputAccessoryView : NSObject
 @end
 @implementation _NoInputAccessoryView
 - (id)inputAccessoryView {
-    WebController *vc = [[WebController alloc] init];
-    return vc.bottomView;
+    return publicWebController.bottomView;
 }
 @end
 
@@ -33,7 +34,6 @@ WKUIDelegate>
 @end
 
 @implementation WebController
-
 -(WKWebView *)wkWebView
 {
     if (!_wkWebView) {
@@ -135,7 +135,7 @@ WKUIDelegate>
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
+    publicWebController = self;
     [self removeInputAccessoryViewFromWKWebView:self.wkWebView];
     
 }
