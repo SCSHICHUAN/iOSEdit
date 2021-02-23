@@ -10,14 +10,12 @@
 //var btnFontFamilyDoc = document.getElementById('fontFamily');
 //var btnHtmlDoc = document.getElementById('html');
 
+//btnBoldDoc.onclick = function(){
+//    insertImage('https://stanserver.cn:444/scEdit.png','img');
+//}
 
 
 
-function focus(){
-      setTimeout(function(){
-      editDoc.focus();
-  },1000);
-}
 
 
 //OC调用JS
@@ -27,6 +25,7 @@ function ocTojsAction(parameter)
         case 'bold':
             bold();
             break;
+            
         case 'unbold':
             unbold();
             break;
@@ -39,6 +38,18 @@ function ocTojsAction(parameter)
             underline();
             break;
             
+        case 'justifyLeft':
+            justifyLeft();
+            break;
+            
+        case 'justifyCenter':
+            justifyCenter();
+            break;
+            
+        case 'insertImage':
+            insertImage('https://stanserver.cn:444/scEdit.png','img');
+            break;
+            
         default:
             break;
     }
@@ -46,7 +57,8 @@ function ocTojsAction(parameter)
 }
 
 
-  
+
+
 //加粗
 function bold(){
     document.execCommand('bold',false,null);
@@ -61,6 +73,24 @@ function italics(){
 //下划线
 function underline(){
     document.execCommand('underline', false, null);
+}
+//左对齐
+function justifyLeft(){
+    document.execCommand('justifyLeft', false, null);
+}
+//中间对齐
+function justifyCenter(){
+    document.execCommand('justifyCenter', false, null);
+}
+//插入图片
+function insertImage(url, alt) {
+    var html ="<br />" + '<img src="' + url + '" alt="' + alt + '" style="width:90%;"/>';
+    insertHTML(html);
+}
+
+//插入html
+function insertHTML(html) {
+    document.execCommand('insertHTML', false, html);
 }
 
 ////红色

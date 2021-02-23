@@ -15,6 +15,10 @@
 <WKNavigationDelegate,
 WKScriptMessageHandler,
 WKUIDelegate>
+{
+    UIButton *justifyLeftButton;
+    UIButton *justifyCenterButton;
+}
 @property(nonatomic)WKWebView *wkWebView;
 @property(nonatomic)UIView *bottomView;
 @end
@@ -40,9 +44,17 @@ WKUIDelegate>
     preferences.javaScriptCanOpenWindowsAutomatically = YES;
     config.preferences = preferences;
     
-    WKWebpagePreferences *pagePreferences = [[WKWebpagePreferences alloc] init];
-    pagePreferences.allowsContentJavaScript = YES;
-    config.defaultWebpagePreferences = pagePreferences;
+    if (@available(iOS 13.0, *)) {
+        WKWebpagePreferences *pagePreferences = [[WKWebpagePreferences alloc] init];
+        if (@available(iOS 14.0, *)) {
+            pagePreferences.allowsContentJavaScript = YES;
+        } else {
+            // Fallback on earlier versions
+        }
+        config.defaultWebpagePreferences = pagePreferences;
+    } else {
+        // Fallback on earlier versions
+    }
     
     
     config.allowsInlineMediaPlayback = YES;
@@ -61,7 +73,7 @@ WKUIDelegate>
 {
     if (!_bottomView) {
         _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height-44, [UIScreen mainScreen].bounds.size.width, 44)];
-        _bottomView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+        _bottomView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1];
         
         UIButton *boldButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [boldButton setImage:[UIImage imageNamed:@"B"] forState:UIControlStateNormal];
@@ -84,12 +96,28 @@ WKUIDelegate>
         [_bottomView addSubview:underlineButton];
         [underlineButton addTarget:self action:@selector(underlineButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
-//        UIButton *boldButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [boldButton setImage:[UIImage imageNamed:@"B"] forState:UIControlStateNormal];
-//        [boldButton setImage:[UIImage imageNamed:@"BHOVER"] forState:UIControlStateSelected];
-//        boldButton.frame = CGRectMake(44*3, 0, 44, 44);
-//        _bottomView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
-//        [_bottomView addSubview:boldButton];
+        UIButton *justifyLeftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [justifyLeftButton setImage:[UIImage imageNamed:@"zuo"] forState:UIControlStateNormal];
+        [justifyLeftButton setImage:[UIImage imageNamed:@"zuohover"] forState:UIControlStateSelected];
+        justifyLeftButton.frame = CGRectMake(44*3, 0, 44, 44);
+        [_bottomView addSubview:justifyLeftButton];
+        [justifyLeftButton addTarget:self action:@selector(justifyLeftButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        self->justifyLeftButton = justifyLeftButton;
+        
+        UIButton *justifyCenterButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [justifyCenterButton setImage:[UIImage imageNamed:@"zhong"] forState:UIControlStateNormal];
+        [justifyCenterButton setImage:[UIImage imageNamed:@"zhonghover"] forState:UIControlStateSelected];
+        justifyCenterButton.frame = CGRectMake(44*4, 0, 44, 44);
+        [_bottomView addSubview:justifyCenterButton];
+        [justifyCenterButton addTarget:self action:@selector(justifyCenterButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        self->justifyCenterButton = justifyCenterButton;
+        
+        UIButton *insertImageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [insertImageButton setImage:[UIImage imageNamed:@"tupian"] forState:UIControlStateNormal];
+        insertImageButton.frame = CGRectMake(44*5, 0, 44, 44);
+        [insertImageButton addTarget:self action:@selector(insertImageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView addSubview:insertImageButton];
+        
         
     }
     return _bottomView;
@@ -171,6 +199,30 @@ WKUIDelegate>
         [self ocTojs:@"underline"];
     }
 }
+-(void)justifyLeftButtonClick:(UIButton*)send
+{
+    
+    if (!send.isSelected) {
+        [self ocTojs:@"justifyLeft"];
+        send.selected = !send.selected;
+        self->justifyCenterButton.selected = NO;
+    }
+    
+}
+-(void)justifyCenterButtonClick:(UIButton*)send
+{
+    if (!send.isSelected) {
+        [self ocTojs:@"justifyCenter"];
+        send.selected = !send.selected;
+        self->justifyLeftButton.selected = NO;
+    }
+
+}
+-(void)insertImageButtonClick:(UIButton*)send
+{
+    [self ocTojs:@"insertImage"];
+}
+
 
 
 -(void)ocTojs:(NSString*)action
