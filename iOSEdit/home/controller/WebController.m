@@ -42,20 +42,8 @@ WKUIDelegate>
     WKPreferences *preferences = [[WKPreferences alloc] init];
     preferences.minimumFontSize = 0;
     preferences.javaScriptCanOpenWindowsAutomatically = YES;
+    preferences.javaScriptEnabled = YES;
     config.preferences = preferences;
-    
-    if (@available(iOS 13.0, *)) {
-        WKWebpagePreferences *pagePreferences = [[WKWebpagePreferences alloc] init];
-        if (@available(iOS 14.0, *)) {
-            pagePreferences.allowsContentJavaScript = YES;
-        } else {
-            // Fallback on earlier versions
-        }
-        config.defaultWebpagePreferences = pagePreferences;
-    } else {
-        // Fallback on earlier versions
-    }
-    
     
     config.allowsInlineMediaPlayback = YES;
     config.mediaTypesRequiringUserActionForPlayback = YES;
