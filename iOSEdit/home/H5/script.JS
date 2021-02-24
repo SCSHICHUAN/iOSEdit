@@ -1,5 +1,7 @@
 
 var editDoc = document.getElementById('edit');
+var fontSizeDoc = document.getElementById('fontSize');
+
 //var btnBoldDoc = document.getElementById('bold');
 //var btnItalicsDoc = document.getElementById('italics');
 //var btnUnderlineDoc = document.getElementById('underline');
@@ -18,6 +20,7 @@ var editDoc = document.getElementById('edit');
 window.onload=function(){
  
     editDoc.focus();
+    fontSizeDoc.hidden = true;
 }
 
 
@@ -64,6 +67,9 @@ function ocTojsAction(parameter)
             break;
         case 'insertVideo':
             insertVideo('https://stanserver.cn:444/cat1.mp4');
+            break;
+        case 'fontSize':
+            fontSize();
             break;
             
         case 'unfocus':
@@ -172,7 +178,15 @@ function scrollFocus()
         imgDoc.scrollIntoView();
     }, 400);
 }
-
+var shoFontView = true;
+function fontSize(){
+    shoFontView = !shoFontView;
+    if(shoFontView){
+        fontSizeDoc.hidden = true;
+    }else{
+        fontSizeDoc.hidden = false;
+    }
+}
 
 
 //插入html

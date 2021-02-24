@@ -125,9 +125,15 @@ WKUIDelegate>
         [insertVideoButton addTarget:self action:@selector(insertVideoButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [toolView addSubview:insertVideoButton];
         
+        UIButton *fontSizeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [fontSizeButton setImage:[UIImage imageNamed:@"ziti"] forState:UIControlStateNormal];
+        fontSizeButton.frame = CGRectMake(44*7, 0, 44, 44);
+        [fontSizeButton addTarget:self action:@selector(fontSizeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [toolView addSubview:fontSizeButton];
+        
         UIButton *closeKeyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [closeKeyButton setImage:[UIImage imageNamed:@"jianpanshang"] forState:UIControlStateNormal];
-        closeKeyButton.frame = CGRectMake(44*7, 0, 44, 44);
+        [closeKeyButton setImage:[UIImage imageNamed:@"jianpanxia"] forState:UIControlStateNormal];
+        closeKeyButton.frame = CGRectMake(44*8, 0, 44, 44);
         [closeKeyButton addTarget:self action:@selector(closeKeyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [toolView addSubview:closeKeyButton];
         
@@ -286,6 +292,12 @@ WKUIDelegate>
 {
     [self ocTojs:@"unfocus"];    
 }
+-(void)fontSizeButtonClick:(UIButton*)send
+{
+    [self ocTojs:@"fontSize"];
+}
+
+
 
 
 -(void)ocTojs:(NSString*)action
