@@ -140,7 +140,10 @@ function insertImage(url, alt) {
     setTimeout(function() {
     	justifyLeft();
     }, 200);
-   
+    setTimeout(function() {
+        document.scrollTop = 2000;
+    }, 400);
+    
 }
 
 //插入html
@@ -166,6 +169,7 @@ document.onkeydown=function(event)
 //        insertHTML("<br/>");
     }
 }
+
 
 
 

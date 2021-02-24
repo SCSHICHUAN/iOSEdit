@@ -41,7 +41,7 @@ WKUIDelegate>
         _wkWebView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:[self wkWebViewConfiguration]];
         _wkWebView.navigationDelegate = self;
         _wkWebView.UIDelegate = self;
-        _wkWebView.scrollView.scrollEnabled = NO;
+       _wkWebView.scrollView.scrollEnabled = NO;
     }
     return _wkWebView;
 }
@@ -71,35 +71,37 @@ WKUIDelegate>
 -(UIView *)bottomView
 {
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height-44, [UIScreen mainScreen].bounds.size.width, 44)];
-        _bottomView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1];
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50)];
+    
+        UIView *toolView = [[UIView alloc] initWithFrame:CGRectMake(0, 10,  [UIScreen mainScreen].bounds.size.width, 44)];
+        toolView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1];
         
         UIButton *boldButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [boldButton setImage:[UIImage imageNamed:@"B"] forState:UIControlStateNormal];
         [boldButton setImage:[UIImage imageNamed:@"BHOVER"] forState:UIControlStateSelected];
         boldButton.frame = CGRectMake(0, 0, 44, 44);
-        [_bottomView addSubview:boldButton];
+        [toolView addSubview:boldButton];
         [boldButton addTarget:self action:@selector(boldButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton *italicsButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [italicsButton setImage:[UIImage imageNamed:@"I"] forState:UIControlStateNormal];
         [italicsButton setImage:[UIImage imageNamed:@"IHOVER"] forState:UIControlStateSelected];
         italicsButton.frame = CGRectMake(44, 0, 44, 44);
-        [_bottomView addSubview:italicsButton];
+        [toolView addSubview:italicsButton];
         [italicsButton addTarget:self action:@selector(italicsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton *underlineButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [underlineButton setImage:[UIImage imageNamed:@"u"] forState:UIControlStateNormal];
         [underlineButton setImage:[UIImage imageNamed:@"uHOVER"] forState:UIControlStateSelected];
         underlineButton.frame = CGRectMake(44*2, 0, 44, 44);
-        [_bottomView addSubview:underlineButton];
+        [toolView addSubview:underlineButton];
         [underlineButton addTarget:self action:@selector(underlineButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton *justifyLeftButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [justifyLeftButton setImage:[UIImage imageNamed:@"zuo"] forState:UIControlStateNormal];
         [justifyLeftButton setImage:[UIImage imageNamed:@"zuohover"] forState:UIControlStateSelected];
         justifyLeftButton.frame = CGRectMake(44*3, 0, 44, 44);
-        [_bottomView addSubview:justifyLeftButton];
+        [toolView addSubview:justifyLeftButton];
         [justifyLeftButton addTarget:self action:@selector(justifyLeftButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         self->justifyLeftButton = justifyLeftButton;
         
@@ -107,7 +109,7 @@ WKUIDelegate>
         [justifyCenterButton setImage:[UIImage imageNamed:@"zhong"] forState:UIControlStateNormal];
         [justifyCenterButton setImage:[UIImage imageNamed:@"zhonghover"] forState:UIControlStateSelected];
         justifyCenterButton.frame = CGRectMake(44*4, 0, 44, 44);
-        [_bottomView addSubview:justifyCenterButton];
+        [toolView addSubview:justifyCenterButton];
         [justifyCenterButton addTarget:self action:@selector(justifyCenterButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         self->justifyCenterButton = justifyCenterButton;
         
@@ -115,14 +117,15 @@ WKUIDelegate>
         [insertImageButton setImage:[UIImage imageNamed:@"tupian"] forState:UIControlStateNormal];
         insertImageButton.frame = CGRectMake(44*5, 0, 44, 44);
         [insertImageButton addTarget:self action:@selector(insertImageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_bottomView addSubview:insertImageButton];
+        [toolView addSubview:insertImageButton];
         
         UIButton *closeKeyButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [closeKeyButton setImage:[UIImage imageNamed:@"jianpanshang"] forState:UIControlStateNormal];
         closeKeyButton.frame = CGRectMake(44*6, 0, 44, 44);
         [closeKeyButton addTarget:self action:@selector(closeKeyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_bottomView addSubview:closeKeyButton];
+        [toolView addSubview:closeKeyButton];
         
+        [_bottomView addSubview:toolView];
         
     }
     return _bottomView;
