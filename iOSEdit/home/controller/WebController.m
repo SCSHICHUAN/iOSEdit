@@ -41,6 +41,7 @@ WKUIDelegate>
         _wkWebView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:[self wkWebViewConfiguration]];
         _wkWebView.navigationDelegate = self;
         _wkWebView.UIDelegate = self;
+        _wkWebView.scrollView.scrollEnabled = NO;
     }
     return _wkWebView;
 }
