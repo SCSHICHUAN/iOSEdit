@@ -1,5 +1,5 @@
 
-//var editDoc = document.getElementById('edit');
+var editDoc = document.getElementById('edit');
 //var btnBoldDoc = document.getElementById('bold');
 //var btnItalicsDoc = document.getElementById('italics');
 //var btnUnderlineDoc = document.getElementById('underline');
@@ -13,6 +13,12 @@
 //btnBoldDoc.onclick = function(){
 //    unfocus();
 //}
+
+
+window.onload=function(){
+ 
+    editDoc.focus();
+}
 
 
 var b = false;
