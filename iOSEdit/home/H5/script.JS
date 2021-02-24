@@ -128,9 +128,12 @@ function justifyLeft(){
 function justifyCenter(){
     document.execCommand('justifyCenter', false, null);
 }
+
 //插入图片
+var imgID = 0;
 function insertImage(url, alt) {
-    var html ='</br><img src="' + url + '" alt="' + alt + '" style="width:80%;"/>';
+    imgID += 1;
+    var html ='</br><img id = "'+imgID+'"src="' + url + '" alt="' + alt + '" style="width:80%;"/>';
     insertHTML(html);
     
     justifyCenter();
@@ -140,8 +143,12 @@ function insertImage(url, alt) {
     setTimeout(function() {
     	justifyLeft();
     }, 200);
+    
+    
+    //滚动到可见区域
     setTimeout(function() {
-        document.scrollTop = 2000;
+       var imgDoc =  document.getElementById(imgID);
+        imgDoc.scrollIntoView();
     }, 400);
     
 }
@@ -204,3 +211,6 @@ document.onkeydown=function(event)
 //    var a = editDoc.innerHTML;
 //    console.log(a);
 //}
+
+
+
