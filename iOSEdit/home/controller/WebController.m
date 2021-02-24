@@ -27,6 +27,7 @@ WebController *publicWebController;
 WKScriptMessageHandler,
 WKUIDelegate>
 {
+    UIButton *bold;
     UIButton *justifyLeftButton;
     UIButton *justifyCenterButton;
 }
@@ -223,6 +224,8 @@ WKUIDelegate>
     send.selected = !send.selected;
     if (send.isSelected) {
         [self ocTojs:@"italics"];
+    }else{
+        [self ocTojs:@"unitalics"];
     }
 }
 
@@ -231,6 +234,8 @@ WKUIDelegate>
     send.selected = !send.selected;
     if (send.isSelected) {
         [self ocTojs:@"underline"];
+    }else{
+        [self ocTojs:@"ununderline"];
     }
 }
 -(void)justifyLeftButtonClick:(UIButton*)send
@@ -243,6 +248,10 @@ WKUIDelegate>
     }
     
 }
+
+
+
+
 -(void)justifyCenterButtonClick:(UIButton*)send
 {
     if (!send.isSelected) {

@@ -15,17 +15,17 @@
 //}
 
 
-
+var b = false;
 
 
 //OC调用JS
 function ocTojsAction(parameter)
 {
     switch (parameter) {
+            
         case 'bold':
             bold();
             break;
-            
         case 'unbold':
             unbold();
             break;
@@ -33,9 +33,16 @@ function ocTojsAction(parameter)
         case 'italics':
             italics();
             break;
+        case 'unitalics':
+            unitalics();
+            break;
+            
             
         case 'underline':
             underline();
+            break;
+        case 'ununderline':
+            ununderline();
             break;
             
         case 'justifyLeft':
@@ -61,23 +68,58 @@ function ocTojsAction(parameter)
 }
 
 
-
+var bold_b = false;
+var italics_b = false;
+var underline_b = false;
 
 //加粗
 function bold(){
+    bold_b = true;
     document.execCommand('bold',false,null);
 }
 function unbold(){
-    document.execCommand('bold',false,null);
+    bold_b = false;
+    document.execCommand('bold', false, null);
+    unZeroSpace('bold');
 }
+
 //斜体
 function italics(){
+    italics_b = true;
     document.execCommand('italic', false, null);
 }
+function unitalics(){
+    italics_b = false;
+    document.execCommand('italic', false, null);
+    unZeroSpace('italic');
+}
+
 //下划线
 function underline(){
+    underline_b = true;
     document.execCommand('underline', false, null);
 }
+function ununderline(){
+    underline_b = false;
+    document.execCommand('underline', false, null);
+    unZeroSpace('underline');
+}
+
+//取消选择和多选
+function unZeroSpace(e){
+    document.execCommand('insertHTML', false, '&zwnj;');
+    if(bold_b){
+        bold();
+    }
+    if(italics_b){
+        italics();
+    }
+    if(underline_b){
+        underline();
+    }
+}
+
+
 //左对齐
 function justifyLeft(){
     document.execCommand('justifyLeft', false, null);
@@ -90,13 +132,12 @@ function justifyCenter(){
 function insertImage(url, alt) {
     var html ='</br><img src="' + url + '" alt="' + alt + '" style="width:80%;"/>';
     insertHTML(html);
+    
     justifyCenter();
     setTimeout(function() {
     	insertHTML("</br>");
     }, 100);
-   
-
-   setTimeout(function() {
+    setTimeout(function() {
     	justifyLeft();
     }, 200);
    
@@ -114,6 +155,12 @@ function unfocus()
 //键盘输入
 document.onkeydown=function(event)
 {
+    if(b){
+        insertHTML('<span>'+event.key+'</span>');
+    }else{
+        b = false;
+    }
+    
     var e = event || window.event || arguments.callee.caller.arguments[0];
     if(e && e.keyCode==13){ // enter 键
 //        insertHTML("<br/>");
