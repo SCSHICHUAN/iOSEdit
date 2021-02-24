@@ -62,6 +62,9 @@ function ocTojsAction(parameter)
         case 'insertImage':
             insertImage('https://stanserver.cn:444/scEdit.png','img');
             break;
+        case 'insertVideo':
+            insertVideo('https://stanserver.cn:444/cat1.mp4');
+            break;
             
         case 'unfocus':
             unfocus();
@@ -141,23 +144,36 @@ function insertImage(url, alt) {
     imgID += 1;
     var html ='</br><img id = "'+imgID+'"src="' + url + '" alt="' + alt + '" style="width:80%;"/>';
     insertHTML(html);
+    scrollFocus();
+}
+
+//插入视频
+function insertVideo(url) {
+    imgID += 1;
+    var html ='</br><div style="width:100%"><video id = '+imgID+' src='+url+' controls="controls" autoplay playsinline style="width:80%">您的浏览器不支持 video 标签。</video>&zwnj;</div>';
+    insertHTML(html);
+    scrollFocus();
     
+}
+//插入图片视频音频滚动
+function scrollFocus()
+{
     justifyCenter();
     setTimeout(function() {
-    	insertHTML("</br>");
+        insertHTML("</br>");
     }, 100);
     setTimeout(function() {
-    	justifyLeft();
+        justifyLeft();
     }, 200);
-    
-    
+
     //滚动到可见区域
     setTimeout(function() {
        var imgDoc =  document.getElementById(imgID);
         imgDoc.scrollIntoView();
     }, 400);
-    
 }
+
+
 
 //插入html
 function insertHTML(html) {

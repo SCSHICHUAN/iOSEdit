@@ -119,9 +119,15 @@ WKUIDelegate>
         [insertImageButton addTarget:self action:@selector(insertImageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [toolView addSubview:insertImageButton];
         
+        UIButton *insertVideoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [insertVideoButton setImage:[UIImage imageNamed:@"icon_video"] forState:UIControlStateNormal];
+        insertVideoButton.frame = CGRectMake(44*6, 0, 44, 44);
+        [insertVideoButton addTarget:self action:@selector(insertVideoButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [toolView addSubview:insertVideoButton];
+        
         UIButton *closeKeyButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [closeKeyButton setImage:[UIImage imageNamed:@"jianpanshang"] forState:UIControlStateNormal];
-        closeKeyButton.frame = CGRectMake(44*6, 0, 44, 44);
+        closeKeyButton.frame = CGRectMake(44*7, 0, 44, 44);
         [closeKeyButton addTarget:self action:@selector(closeKeyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [toolView addSubview:closeKeyButton];
         
@@ -270,6 +276,11 @@ WKUIDelegate>
 {
     [self ocTojs:@"insertImage"];
 }
+-(void)insertVideoButtonClick:(UIButton*)send
+{
+    [self ocTojs:@"insertVideo"];
+}
+
 
 -(void)closeKeyButtonClick:(UIButton*)send
 {
