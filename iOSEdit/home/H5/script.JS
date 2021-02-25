@@ -18,7 +18,7 @@ var fontSizeDoc = document.getElementById('fontSize');
 
 window.onload=function(){
     editDoc.focus();
-//    fontSizeDoc.hidden = true;
+    fontSizeDoc.hidden = true;
     textSet();
     
 }
