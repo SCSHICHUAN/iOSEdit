@@ -223,9 +223,11 @@ function fontSize(){
 //button 标签才可以触发 execCommand
 function textSet(){
     $('#fontSize').click(function(e) {
-        var  target =  $(e.target).attr("id");
+        var  target =  $(e.target);
+        var  ID = target.attr("id");
+        var  html = target.text();
         
-        switch (target) {
+        switch (ID) {
                 
             case 'fontSize_a':
                 redText();
@@ -235,37 +237,31 @@ function textSet(){
                 break;
                 
             case 'fontSize_c':
-                italics();
+                fountSize(html);
                 break;
             case 'fontSize_d':
-                unitalics();
+                fountSize(html);
                 break;
-                
-                
+            
             case 'fontSize_e':
-                underline();
+                fountSize(html);
                 break;
             case 'fontSize_f':
-                ununderline();
+                fountSize(html);
                 break;
                 
             case 'fontSize_g':
-                justifyLeft();
+                fountSize(html);
                 break;
-                
+                fountSize(html);
             case 'fontSize_h':
-                justifyCenter();
+                
                 break;
                 
             case 'fontSize_j':
-                insertImage('https://stanserver.cn:444/scEdit.png','img');
+                
                 break;
-            case 'fontSize_a':
-                insertVideo('https://stanserver.cn:444/cat1.mp4');
-                break;
-            case 'fontSize_a':
-                fontSize();
-                break;
+            
                 
                 
             default:
@@ -293,10 +289,11 @@ function blackText(){
 //    document.execCommand('insertImage', false, '1.png');
 //}
 //
-////字体大小
-//btnFontDoc.onclick = function(){
-//    document.execCommand("fontSize", false, '20px');
-//}
+//字体大小
+function fountSize(size){
+    var font = size;
+    document.execCommand("fontSize", false,size);
+}
 ////字体风格
 //btnFontFamilyDoc.onclick = function(){
 //    document.execCommand("fontname", false, '微软雅黑');
