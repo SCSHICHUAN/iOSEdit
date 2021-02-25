@@ -18,7 +18,7 @@ var fontSizeDoc = document.getElementById('fontSize');
 
 window.onload=function(){
     editDoc.focus();
-    fontSizeDoc.hidden = true;
+//    fontSizeDoc.hidden = true;
     textSet();
     
 }
@@ -229,41 +229,26 @@ function textSet(){
         
         switch (ID) {
                 
-            case 'fontSize_a':
-                redText();
+            case 'color_a':
+                textColor('black');
                 break;
-            case 'fontSize_b':
-                blackText();
+            case 'color_b':
+                textColor('red');
+                break;
+            case 'color_c':
+                textColor('yellow');
+                break;
+            case 'color_d':
+                textColor('blue');
+                break;
+            case 'color_e':
+                textColor('green');
                 break;
                 
-            case 'fontSize_c':
-                fountSize(html);
-                break;
-            case 'fontSize_d':
+            case 'font':
                 fountSize(html);
                 break;
             
-            case 'fontSize_e':
-                fountSize(html);
-                break;
-            case 'fontSize_f':
-                fountSize(html);
-                break;
-                
-            case 'fontSize_g':
-                fountSize(html);
-                break;
-                fountSize(html);
-            case 'fontSize_h':
-                
-                break;
-                
-            case 'fontSize_j':
-                
-                break;
-            
-                
-                
             default:
                 break;
         }
@@ -272,16 +257,10 @@ function textSet(){
     });
 }
 
-//红色
-function redText(){
+//字体颜色
+function textColor(color){
     document.execCommand("styleWithCSS", null, true);
-    document.execCommand('foreColor',false,'red');
-    document.execCommand("styleWithCSS", null, false);
-}
-//黑色
-function blackText(){
-    document.execCommand("styleWithCSS", null, true);
-    document.execCommand('foreColor',false,'rgb(0,0,0)');
+    document.execCommand('foreColor',false,color);
     document.execCommand("styleWithCSS", null, false);
 }
 ////插入图片

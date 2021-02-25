@@ -30,28 +30,50 @@ body{
     background-color: rgb(240,240,240);
     
     width: 80%;
-    height: 44px;
+    height: 40px;
     position: fixed;
     z-index: 99;
     /*先把xy移动到中心*/
     left: 50%;
     top: 50%;
     /*然后回移动一半*/
-    margin-top: -22px;
+    margin-top: -20px;
     margin-left: -40%;
 }
 .fontSize{
-    width: 30px;
-    height: 43px;
+    width: 40px;
+    height: 40px;
     display: inline-block;
     margin: 0 0 0 0;
     background-color: rgb(230,230,230);
     text-align: center;
-    line-height:44px;
+    line-height:40px;
+    font-size:20px;
+    padding:0px;
 }
-#fontSize_a{
-    background-color:red;
-}
-#fontSize_b{
+#color_a{
     background-color:black;
 }
+#color_b{
+    background-color:red;
+}
+#color_c{
+    background-color:yellow;
+}
+#color_d{
+    background-color:blue;
+}
+#color_e{
+    background-color:green;
+}
+
+
+
+
+
+
+
+
+
+
+
