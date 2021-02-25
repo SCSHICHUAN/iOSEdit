@@ -140,8 +140,8 @@
 			children = (
 				82C0661425E3487B00648650 /* SCEdit.html */,
 				82C0661A25E3491A00648650 /* script.js */,
-				825BE20225E6316400F43C0D /* jquery.js */,
 				82C0661725E348F000648650 /* style.css */,
+				825BE20225E6316400F43C0D /* jquery.js */,
 			);
 			path = H5;
 			sourceTree = "<group>";

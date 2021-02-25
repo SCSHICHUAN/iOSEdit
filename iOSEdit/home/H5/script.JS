@@ -16,16 +16,16 @@ var fontSizeDoc = document.getElementById('fontSize');
 //    unfocus();
 //}
 
-
 window.onload=function(){
-    
     editDoc.focus();
     fontSizeDoc.hidden = true;
+    textSet();
+    
 }
 
 
-var b = false;
 
+var b = false;
 
 //OC调用JS
 function ocTojsAction(parameter)
@@ -185,17 +185,6 @@ function scrollFocus()
         imgDoc.scrollIntoView();
     }, 400);
 }
-var shoFontView = true;
-function fontSize(){
-    shoFontView = !shoFontView;
-    if(shoFontView){
-        fontSizeDoc.hidden = true;
-    }else{
-        fontSizeDoc.hidden = false;
-    }
-}
-
-
 //插入html
 function insertHTML(html) {
     document.execCommand('insertHTML', false, html);
@@ -221,20 +210,84 @@ document.onkeydown=function(event)
 }
 
 
+var shoFontView = true;
+function fontSize(){
+    shoFontView = !shoFontView;
+    if(shoFontView){
+        fontSizeDoc.hidden = true;
+    }else{
+        fontSizeDoc.hidden = false;
+    }
+    
+}
+//button 标签才可以触发 execCommand
+function textSet(){
+    $('#fontSize').click(function(e) {
+        var  target =  $(e.target).attr("id");
+        
+        switch (target) {
+                
+            case 'fontSize_a':
+                redText();
+                break;
+            case 'fontSize_b':
+                blackText();
+                break;
+                
+            case 'fontSize_c':
+                italics();
+                break;
+            case 'fontSize_d':
+                unitalics();
+                break;
+                
+                
+            case 'fontSize_e':
+                underline();
+                break;
+            case 'fontSize_f':
+                ununderline();
+                break;
+                
+            case 'fontSize_g':
+                justifyLeft();
+                break;
+                
+            case 'fontSize_h':
+                justifyCenter();
+                break;
+                
+            case 'fontSize_j':
+                insertImage('https://stanserver.cn:444/scEdit.png','img');
+                break;
+            case 'fontSize_a':
+                insertVideo('https://stanserver.cn:444/cat1.mp4');
+                break;
+            case 'fontSize_a':
+                fontSize();
+                break;
+                
+                
+            default:
+                break;
+        }
 
+        editDoc.focus();
+    });
+}
 
-////红色
-//btnRedDoc.onclick = function(){
-//    document.execCommand("styleWithCSS", null, true);
-//    document.execCommand('foreColor',false,'red');
-//    document.execCommand("styleWithCSS", null, false);
-//}
-////黑色
-//btnBlackDoc.onclick = function(){
-//    document.execCommand("styleWithCSS", null, true);
-//    document.execCommand('foreColor',false,'rgb(0,0,0)');
-//    document.execCommand("styleWithCSS", null, false);
-//}
+//红色
+function redText(){
+    document.execCommand("styleWithCSS", null, true);
+    document.execCommand('foreColor',false,'red');
+    document.execCommand("styleWithCSS", null, false);
+}
+//黑色
+function blackText(){
+    document.execCommand("styleWithCSS", null, true);
+    document.execCommand('foreColor',false,'rgb(0,0,0)');
+    document.execCommand("styleWithCSS", null, false);
+}
 ////插入图片
 //btnImageDoc.onclick = function(){
 //    document.execCommand('insertImage', false, '1.png');
