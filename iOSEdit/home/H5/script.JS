@@ -18,7 +18,7 @@ var fontSizeDoc = document.getElementById('fontSize');
 
 
 window.onload=function(){
- 
+    
     editDoc.focus();
     fontSizeDoc.hidden = true;
 }
@@ -79,7 +79,7 @@ function ocTojsAction(parameter)
         default:
             break;
     }
-
+    
 }
 
 
@@ -122,7 +122,14 @@ function ununderline(){
 
 //取消选择和多选
 function unZeroSpace(e){
-    document.execCommand('insertHTML', false, '&zwnj;');
+    
+    var select = document.getSelection();
+    //有高亮的文字
+    var highlight =select.isCollapsed;
+    if(highlight){
+        document.execCommand('insertHTML', false, '&zwnj;');
+    }
+    
     if(bold_b){
         bold();
     }
@@ -171,10 +178,10 @@ function scrollFocus()
     setTimeout(function() {
         justifyLeft();
     }, 200);
-
+    
     //滚动到可见区域
     setTimeout(function() {
-       var imgDoc =  document.getElementById(imgID);
+        var imgDoc =  document.getElementById(imgID);
         imgDoc.scrollIntoView();
     }, 400);
 }
@@ -209,7 +216,7 @@ document.onkeydown=function(event)
     
     var e = event || window.event || arguments.callee.caller.arguments[0];
     if(e && e.keyCode==13){ // enter 键
-//        insertHTML("<br/>");
+        //        insertHTML("<br/>");
     }
 }
 
